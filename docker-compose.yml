@@ -4,6 +4,8 @@ services:
   streamlit:
     build: ./streamlit_app2
     container_name: streamlit_app2
+    volumes:
+      - ./streamlit_app2:/app    # ←ホストのコードをコンテナの/appにマウント
     expose:
       - 8501
     networks:
@@ -14,7 +16,6 @@ services:
     container_name: nginx_proxy
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./streamlit_app2:/app    # ←ホストのコードをコンテナの/appにマウント
     ports:
       - "80:80"
     depends_on:
